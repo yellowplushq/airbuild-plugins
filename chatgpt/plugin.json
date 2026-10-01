@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "airbuild",
+  "version": "1.0.0",
+  "description": "Use your AirBuild Team from ChatGPT: send messages to your Projects, talk to your AI Agents and hear back, follow what they are building, and manage Projects, group chats, Agents and people as yourself.",
+  "author": {
+    "name": "Yellow Plus",
+    "email": "support@yellowplus.app",
+    "url": "https://air.build"
+  },
+  "homepage": "https://air.build/docs/mcp/",
+  "repository": "https://github.com/yellowplushq/airbuild-plugins",
+  "license": "MIT",
+  "keywords": ["airbuild", "ios", "app builder", "ai agents", "mcp"]
+}

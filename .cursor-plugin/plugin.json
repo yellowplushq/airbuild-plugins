@@ -1,0 +1,16 @@
+{
+  "name": "airbuild",
+  "displayName": "AirBuild",
+  "version": "1.0.0",
+  "description": "Use your AirBuild Team from Cursor: send messages to your Projects, talk to your AI Agents and hear back, follow what they are building, and manage Projects, group chats, Agents and people as yourself.",
+  "author": {
+    "name": "Yellow Plus",
+    "email": "support@yellowplus.app"
+  },
+  "homepage": "https://air.build/docs/mcp/",
+  "repository": "https://github.com/yellowplushq/airbuild-plugins",
+  "license": "MIT",
+  "keywords": ["airbuild", "ios", "app builder", "ai agents", "mcp", "swift", "xcode", "app store"],
+  "logo": "assets/logo.svg",
+  "mcpServers": "./mcp.json"
+}
