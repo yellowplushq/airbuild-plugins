@@ -3,7 +3,18 @@
   "mcpServers": {
     "airbuild": {
       "type": "streamable-http",
-      "url": "https://mcp.air.build/mcp"
+      "url": "https://mcp.air.build/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": { "mode": "dcr" },
+            "authorizationUrl": "https://air.build/oauth/authorize",
+            "tokenUrl": "https://air.build/oauth/token",
+            "baseScopes": ["airbuild"]
+          }
+        }
+      }
     }
   }
 }

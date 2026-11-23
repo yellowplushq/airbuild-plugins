@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "airbuild",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Use your AirBuild Team from ChatGPT: send messages to your Projects, talk to your AI Agents and hear back, follow what they are building, and manage Projects, group chats, Agents and people as yourself.",
   "author": {
     "name": "Yellow Plus",
@@ -11,5 +11,108 @@
   "homepage": "https://air.build/docs/mcp/",
   "repository": "https://github.com/yellowplushq/airbuild-plugins",
   "license": "MIT",
-  "keywords": ["airbuild", "ios", "app builder", "ai agents", "mcp"]
+  "keywords": [
+    "airbuild",
+    "ios",
+    "app builder",
+    "ai agents",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "AirBuild",
+        "shortDescription": "Build apps with your AI Team",
+        "longDescription": "AirBuild is where people build iOS apps with a Team of AI Agents: you describe the app in a chat, the Agents write the Swift, run it in the cloud Simulator, and take it through TestFlight and the App Store.\n\nThis app lets ChatGPT take part in your AirBuild Team as you. Send a message to a Project and the Team's Agents get to work exactly as if you had typed it in the AirBuild app; ChatGPT waits for their reply and relays it, even when it takes a few minutes. Read what happened in a Project, search your chats, and see who is working on what. Run the Team too: create or rename Projects, open group chats, hire or edit Agents, invite people, and attach files to messages or download what the Agents send back. You can also start the Team's iOS Simulator to look at a Project's latest build, and check where an app stands on the App Store.\n\nEverything happens as you, inside the Teams you belong to. Reading never marks a chat as read, so the app stays the way you left it. Owner-only actions in the app, such as inviting people or renaming the Team, stay owner-only here.\n\nYou need an AirBuild account (at air.build or in the AirBuild app). Work the Agents do because you asked through ChatGPT counts against your AirBuild plan, the same as in the app.",
+        "developerName": "Yellow Plus Inc.",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Send a message to a Project or an Agent as you, and wait for the Agents' reply",
+          "Read recent messages in any Project, group chat or direct message",
+          "Search your Team's chats",
+          "List, create, rename and delete Projects",
+          "List the Team's Agents and people, and the model each Agent runs",
+          "Hire, edit and remove Agents",
+          "Start the Team's iOS Simulator and look at a Project's latest build",
+          "Check an app's App Store status, TestFlight builds and reviews"
+        ],
+        "websiteURL": "https://air.build",
+        "supportURL": "https://air.build/support/",
+        "privacyPolicyURL": "https://air.build/privacy/",
+        "termsOfServiceURL": "https://air.build/terms/",
+        "defaultPrompt": [
+          "What Projects do I have in AirBuild?",
+          "Ask the Notes project to add a dark mode and tell me when the Agents reply.",
+          "What happened in my Weather project since yesterday?"
+        ],
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "List the Projects in the account's AirBuild Team.",
+              "prompt": "@AirBuild What Projects do I have in AirBuild?",
+              "tools_triggered": [
+                "list_teams",
+                "list_projects"
+              ],
+              "expected_behavior": "Lists the three Projects of the test account by name: Weather, Habit Tracker and Notes."
+            },
+            {
+              "description": "Read the latest messages in a Project chat.",
+              "prompt": "Show me the last few messages in the Notes project.",
+              "tools_triggered": [
+                "list_teams",
+                "list_channels",
+                "read_messages"
+              ],
+              "expected_behavior": "Shows the latest messages of the Notes Project chat with each sender (the Agents Ato, Pluso and others) and when they were sent. Nothing is marked as read."
+            },
+            {
+              "description": "Send a request to a Project and wait for the Agents' reply.",
+              "prompt": "Tell the Notes project to add a dark mode, and wait for the Agents' reply.",
+              "tools_triggered": [
+                "send_message",
+                "wait_message"
+              ],
+              "expected_behavior": "The request appears in the Notes Project chat in the AirBuild app as the test account's message. The Agents reply (Ato, the product Agent, hands it to Pluso, who checks it in the Simulator) and ChatGPT relays the reply. This can take a few minutes."
+            },
+            {
+              "description": "List the Team's members and the model each Agent runs.",
+              "prompt": "Who is on my Team, and which model does each Agent run?",
+              "tools_triggered": [
+                "list_team_members"
+              ],
+              "expected_behavior": "Lists the test account (owner) and the six Agents with their roles and the model each one runs."
+            },
+            {
+              "description": "Create a Project, then rename it.",
+              "prompt": "Create a Project called Reviewer Demo, then rename it to Reviewer Demo 2.",
+              "tools_triggered": [
+                "create_project",
+                "rename_project"
+              ],
+              "expected_behavior": "A new Project is created and renamed; it appears as Reviewer Demo 2 in the AirBuild app."
+            }
+          ],
+          "negative": [
+            {
+              "description": "A weather question has nothing to do with AirBuild; the app should not be called.",
+              "prompt": "What's the weather in Paris today?"
+            },
+            {
+              "description": "A translation request has nothing to do with AirBuild; the app should not be called.",
+              "prompt": "Translate 'Where is the train station?' into Japanese."
+            },
+            {
+              "description": "Arithmetic has nothing to do with AirBuild; the app should not be called.",
+              "prompt": "What is 15% of 240?"
+            }
+          ]
+        }
+      }
+    }
+  }
 }
